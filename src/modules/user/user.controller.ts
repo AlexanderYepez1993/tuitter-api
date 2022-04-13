@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+
+import { RoleType } from '../../common/enum';
 import { Roles } from '../role/decorators/role.decorator';
 import { RoleGuard } from '../role/guards/role.guard';
-
 import { User } from './entities';
 import { UserService } from './user.service';
 
@@ -19,8 +20,8 @@ export class UserController {
     }
 
     @Get(':id')
-    @Roles('ADMIN', 'AUTHOR')
-    @UseGuards(AuthGuard(), RoleGuard)
+    // @Roles(RoleType.ADMIN)
+    // @UseGuards(AuthGuard(), RoleGuard)
     async getUser(@Param() id: number): Promise<User>{
         const user = await this.userService.getUser(id);
         return user;
