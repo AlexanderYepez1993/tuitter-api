@@ -5,10 +5,10 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthController } from './auth.controller';
-import { AuthRepository } from './auth.repository';
+import { AuthRepository } from './repositories';
 import { Configuration } from '../../common/enum';
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { JwtStrategy } from './strategies';
 
 @Module({
   imports: [

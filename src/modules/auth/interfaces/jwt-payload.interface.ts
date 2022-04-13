@@ -1,4 +1,4 @@
-import { RoleType } from "../role/roletype.enum";
+import { RoleType } from "../../../common/enum";
 
 export interface IJwtPayload{
     id: number;

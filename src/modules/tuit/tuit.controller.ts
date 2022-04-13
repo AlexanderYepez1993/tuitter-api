@@ -1,12 +1,13 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
 
 import { CreateTuitDto, PaginationQueryDto, UpdateTuitDto } from './dto';
-import { Tuit } from './tuit.entity';
-import { TuitsService } from './tuits.service';
+import { Tuit } from './entities';
+import { TuitService } from './tuit.service';
 
 @Controller('tuits')
-export class TuitsController {
-constructor(private readonly tuitService: TuitsService){}
+export class TuitController {
+    
+    constructor(private readonly tuitService: TuitService){}
 
     @Get()
     getTuits(@Query() pagination: PaginationQueryDto): Promise<Tuit[]> {

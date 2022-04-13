@@ -3,11 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { CreateTuitDto, PaginationQueryDto, UpdateTuitDto } from './dto';
-import { Tuit } from './tuit.entity';
-import { User } from '../users/entities';
+import { Tuit } from './entities';
+import { User } from '../user/entities';
 
 @Injectable()
-export class TuitsService {
+export class TuitService {
     
     constructor(
         @InjectRepository(Tuit) private readonly tuitRepository: Repository<Tuit>,
@@ -32,12 +32,12 @@ export class TuitsService {
         return tuit;
     }
 
-    async createTuit({ message, user }: CreateTuitDto): Promise<Tuit>{
-        const tuit: Tuit = this.tuitRepository.create({ message, user });
+    async createTuit({ message/* , user */ }: CreateTuitDto): Promise<Tuit>{
+        const tuit: Tuit = this.tuitRepository.create({ message/* , user */ });
         return this.tuitRepository.save(tuit);
     }
 
-    async updateTuit(id: number, { message }: UpdateTuitDto){
+    async updateTuit(id: number, { message }: UpdateTuitDto): Promise<Tuit>{
         const tuit: Tuit = await this.tuitRepository.preload({
             id,
             message,

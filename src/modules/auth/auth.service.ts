@@ -3,11 +3,11 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { compare } from 'bcryptjs';
 
-import { AuthRepository } from './auth.repository';
+import { AuthRepository } from './repositories';
 import { User } from '../user/entities';
 import { SigninDto, SignupDto } from './dto';
-import { IJwtPayload } from './jwt-payload.interface';
-import { RoleType } from '../role/roletype.enum';
+import { IJwtPayload } from './interfaces';
+import { RoleType } from '../../common/enum';
 
 @Injectable()
 export class AuthService {
