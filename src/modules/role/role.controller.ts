@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 
-import { CreateRoleDto, UpdateRoleDto } from './dto';
-import { Role } from './entities';
+import { CreateRoleDto, ReadRoleDto, UpdateRoleDto } from './dtos';
 import { RoleService } from './role.service';
 
 @Controller('roles')
@@ -10,32 +9,27 @@ export class RoleController {
     constructor(private readonly roleService: RoleService){}
 
     @Get()
-    async getRoles(): Promise<Role[]>{
-        const roles = await this.roleService.getRoles();
-        return roles;
+    getRoles(): Promise<ReadRoleDto[]>{
+        return this.roleService.getRoles();
     }
 
-    @Get(':id')
-    async getRole(@Param() id: number): Promise<Role>{
-        const role = await this.roleService.getRole(id);
-        return role;
+    @Get(':RoleId')
+    getRole(@Param() RoleId: number): Promise<ReadRoleDto>{
+        return this.roleService.getRole(RoleId);
     }
 
     @Post()
-    async createRole(@Body() role: CreateRoleDto): Promise<Role>{
-        const createdRole = await this.roleService.createRole(role);
-        return createdRole;
+    createRole(@Body() role: Partial<CreateRoleDto>): Promise<ReadRoleDto>{
+        return this.roleService.createRole(role);
     }
 
-    @Patch(':id')
-    async updateRole(@Param() id: number, @Body() role: UpdateRoleDto): Promise<void>{
-        const updatedRole = await this.roleService.updateRole(id, role);
-        return updatedRole;
+    @Patch(':RoleId')
+    updateRole(@Param() RoleId: number, @Body() role: Partial<UpdateRoleDto>): Promise<ReadRoleDto>{
+        return this.roleService.updateRole(RoleId, role);
     }
 
-    @Delete(':id')
-    async deleteRole(@Param() id: number): Promise<boolean>{
-        await this.roleService.deleteRole(id);
-        return true;
+    @Delete(':RoleId')
+    deleteRole(@Param() RoleId: number): Promise<void>{
+        return this.roleService.deleteRole(RoleId);
     }
 }

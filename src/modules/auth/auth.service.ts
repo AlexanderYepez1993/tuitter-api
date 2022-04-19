@@ -5,7 +5,7 @@ import { compare } from 'bcryptjs';
 
 import { AuthRepository } from './repositories';
 import { User } from '../user/entities';
-import { SigninDto, SignupDto } from './dto';
+import { SigninDto, SignupDto } from './dtos';
 import { IJwtPayload } from './interfaces';
 import { RoleType } from '../../common/enum';
 

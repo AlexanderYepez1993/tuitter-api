@@ -3,7 +3,7 @@ import { genSalt, hash } from "bcryptjs";
 
 import { Role } from "../../role/entities";
 import { RoleType } from "../../../common/enum";
-import { SignupDto } from "../dto";
+import { SignupDto } from "../dtos";
 import { Tuit } from "../../tuit/entities";
 import { User, UserDetails } from "../../user/entities";
 

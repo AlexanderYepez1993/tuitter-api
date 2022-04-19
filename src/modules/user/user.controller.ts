@@ -4,6 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { RoleType } from '../../common/enum';
 import { Roles } from '../role/decorators/role.decorator';
 import { RoleGuard } from '../role/guards/role.guard';
+import { ReadUserDto, UpdateUserDto } from './dtos';
 import { User } from './entities';
 import { UserService } from './user.service';
 
@@ -14,39 +15,37 @@ export class UserController {
 
     @UseGuards(AuthGuard())
     @Get()
-    async getUsers(): Promise<User[]>{
-        const users = await this.userService.getUsers();
-        return users;
+    getUsers(): Promise<ReadUserDto[]>{
+        return this.userService.getUsers();
     }
 
-    @Get(':id')
+    @Get(':UserId')
     // @Roles(RoleType.ADMIN)
     // @UseGuards(AuthGuard(), RoleGuard)
-    async getUser(@Param() id: number): Promise<User>{
-        const user = await this.userService.getUser(id);
-        return user;
+    getUser(@Param() UserId: number): Promise<ReadUserDto>{
+        return this.userService.getUser(UserId);
     }
 
+    /*
     @Post()
     async createUser(@Body() user: User): Promise<User>{
         const createdUser = await this.userService.createUser(user);
         return createdUser;
     }
+    */
 
-    @Patch(':id')
-    async updateUser(@Param() id: number, @Body() user: User): Promise<void>{
-        const updatedUser = await this.userService.updateUser(id, user);
-        return updatedUser;
+    @Patch(':UserId')
+    updateUser(@Param() UserId: number, @Body() user: UpdateUserDto): Promise<ReadUserDto>{
+        return this.userService.updateUser(UserId, user);
     }
 
-    @Delete(':id')
-    async deleteUser(@Param() id: number): Promise<boolean>{
-        await this.userService.deleteUser(id);
-        return true;
+    @Delete(':UserId')
+    deleteUser(@Param() UserId: number): Promise<void>{
+        return this.userService.deleteUser(UserId);
     }
 
     @Post('setRole/:userId/:roleId')
-    async SetRoleToUser(@Param('userId') userId: number, @Param('roleId') roleId: number): Promise<boolean>{
+    SetRoleToUser(@Param('userId') userId: number, @Param('roleId') roleId: number): Promise<boolean>{
         return this.userService.setRoleToUser(userId, roleId);
     }
 }

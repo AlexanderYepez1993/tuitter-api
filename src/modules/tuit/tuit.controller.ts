@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
 
-import { CreateTuitDto, PaginationQueryDto, UpdateTuitDto } from './dto';
+import { CreateTuitDto, PaginationQueryDto, UpdateTuitDto } from './dtos';
 import { Tuit } from './entities';
 import { TuitService } from './tuit.service';
 
